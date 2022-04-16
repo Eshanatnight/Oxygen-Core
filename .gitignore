@@ -1,0 +1,11 @@
+core/target
+*.node
+core/index.js
+core/index.d.ts
+core/node_modules
+ui/node_modules
+ui/.parcel-cache
+ui/dist
+ui/out
+oxygen.sqlite
+

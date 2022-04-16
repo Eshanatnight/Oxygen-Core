@@ -1,8 +1,8 @@
 {
   "name": "oxygen-ui",
   "productName": "Oxygen",
-  "author": "Jocelyn Stericker",
-  "description": "A voice journal and audio analysis toolkit for people who want to change the way their voice comes across.",
+  "author": "Eshan Chatterjee",
+  "description": "A voice journal",
   "version": "0.0.1",
   "main": "src/main.js",
   "scripts": {

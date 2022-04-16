@@ -11,9 +11,27 @@ pub struct ClipMeta {
     pub name: String,
     pub date: DateTime<Utc>,
 }
+
+
+// Checks if a specified file exists or not
+fn init_file_structure(path: &str)
+{
+    let flag = std::path::Path::new(path).exists();
+
+    if !flag
+    {
+        // create a directory
+        std::fs::create_dir_all("data").expect("Failed to create directory");
+        // create a file
+        std::fs::File::create(path).unwrap();
+    }
+}
+
 impl Db {
-    pub fn open() -> Result<Db> {
-        let connection = Connection::open("oxygen.sqlite")?;
+    pub fn open() -> Result<Db>
+    {
+        init_file_structure("data/oxygen.sqlite");
+        let connection = Connection::open("data/oxygen.sqlite")?;
         let user_version: u32 =
             connection.query_row("SELECT user_version FROM pragma_user_version", [], |r| {
                 r.get(0)
@@ -98,6 +116,7 @@ impl Db {
         Ok(())
     }
 
+    #[allow(dead_code)]
     pub fn load(&self, name: &str) -> Result<Option<AudioClip>> {
         let mut stmt = self
             .0
@@ -177,6 +196,7 @@ impl Db {
         Ok(clip_iter.collect::<Result<_, rusqlite::Error>>()?)
     }
 
+#[allow(dead_code)]
     pub fn delete(&self, name: &str) -> Result<()> {
         self.0
             .execute("DELETE FROM clips WHERE name = ?1", [name])?;

@@ -143,6 +143,7 @@ impl AudioClip {
         Ok(RecordHandle { stream, clip })
     }
 
+    #[allow(dead_code)]
     pub fn import(name: String, path: String) -> Result<AudioClip> {
         // Create a media source. Note that the MediaSource trait is automatically implemented for File,
         // among other types.
@@ -333,6 +334,7 @@ impl AudioClip {
         })
     }
 
+    #[allow(dead_code)]
     pub fn export(&self, path: &str) -> Result<()> {
         if !path.ends_with(".wav") {
             return Err(eyre!("Expected {} to end in .wav", path));
